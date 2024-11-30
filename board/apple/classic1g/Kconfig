@@ -1,0 +1,12 @@
+if TARGET_CLASSIC1G
+
+config SYS_BOARD
+    default "classic1g"
+
+config SYS_VENDOR
+    default "apple"
+
+config SYS_CONFIG_NAME
+    default "appleclassic1g"
+
+endif
