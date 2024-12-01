@@ -46,39 +46,39 @@
         reg = <0x3c500000 0x1000>;
     };
 
-    // vic0: interrupt-controller@38e00000 {
-    //     compatible = "arm,pl192-vic";
-    //     interrupt-controller;
-    //     reg = <0x38e00000 0x1000>;
-    //     #interrupt-cells = <1>;
-    // };
+    vic0: interrupt-controller@38e00000 {
+        compatible = "arm,pl192-vic";
+        interrupt-controller;
+        reg = <0x38e00000 0x1000>;
+        #interrupt-cells = <1>;
+    };
 
-    // vic1: interrupt-controller@38e01000 {
-    //     compatible = "arm,pl192-vic";
-    //     interrupt-controller;
-    //     reg = <0x38e01000 0x1000>;
-    //     #interrupt-cells = <1>;
-    // };
+    vic1: interrupt-controller@38e01000 {
+        compatible = "arm,pl192-vic";
+        interrupt-controller;
+        reg = <0x38e01000 0x1000>;
+        #interrupt-cells = <1>;
+    };
 
-    // dmac0: dma-controller@38200000 {
-    //     compatible = "arm,pl080", "arm,primecell";
-    //     reg = <0x38200000 0x1000>;
-    //     #dma-cells = <1>;
-    //     interrupt-parent = <&vic0>;
-    //     interrupts = <16>;
-    //     clocks = <&clkref>;
-    //     clock-names = "apb_pclk";
-    // };
+    dmac0: dma-controller@38200000 {
+        compatible = "arm,pl080", "arm,primecell";
+        reg = <0x38200000 0x1000>;
+        #dma-cells = <1>;
+        interrupt-parent = <&vic0>;
+        interrupts = <16>;
+        clocks = <&clkref>;
+        clock-names = "apb_pclk";
+    };
 
-    // dmac1: dma-controller@38700000 {
-    //     compatible = "arm,pl080", "arm,primecell";
-    //     reg = <0x38700000 0x1000>;
-    //     #dma-cells = <1>;
-    //     interrupt-parent = <&vic0>;
-    //     interrupts = <17>;
-    //     clocks = <&clkref>;
-    //     clock-names = "apb_pclk";
-    // };
+    dmac1: dma-controller@38700000 {
+        compatible = "arm,pl080", "arm,primecell";
+        reg = <0x38700000 0x1000>;
+        #dma-cells = <1>;
+        interrupt-parent = <&vic0>;
+        interrupts = <17>;
+        clocks = <&clkref>;
+        clock-names = "apb_pclk";
+    };
 
     // lcdcon: lcdcon@38300000 {
     //     compatible = "samsung,s5l8730-lcdcon";
