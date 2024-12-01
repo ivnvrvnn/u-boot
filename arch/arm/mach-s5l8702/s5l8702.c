@@ -415,15 +415,15 @@ int board_early_init_f(void)
 }
 
 
-#ifdef CONFIG_DEBUG_UART_BOARD_INIT
-void board_debug_uart_init(void)
-{
-    s5l8702_enable_clkgate("uart0");
+// #ifdef CONFIG_DEBUG_UART_BOARD_INIT
+// void board_debug_uart_init(void)
+// {
+//     s5l8702_enable_clkgate("uart0");
 
-    // Enable GPIO pins on N5G.
-    static volatile uint32_t *gpio = (uint32_t *)0x3cf00000;
-    *gpio &= 0xff00ffff;
-    *gpio |= 0x00220000;
-}
+//     // Enable GPIO pins on N5G.
+//     static volatile uint32_t *gpio = (uint32_t *)0x3cf00000;
+//     *gpio &= 0xff00ffff;
+//     *gpio |= 0x00220000;
+// }
 
-#endif
+// #endif
