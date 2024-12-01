@@ -144,24 +144,24 @@ struct s5l8702_lcdcon {
     uint32_t write;  // 0x40
 };
 
-#define s5l8702_LCDCON ((volatile struct s5l8702_lcdcon *)0x38300000)
+// #define s5l8702_LCDCON ((volatile struct s5l8702_lcdcon *)0x38300000)
 
-static void s5l8702_lcdcon_read_byte(uint8_t *out) {
-    udelay(100);
-    writel(0, &s5l8702_LCDCON->ack);
+// static void s5l8702_lcdcon_read_byte(uint8_t *out) {
+//     udelay(100);
+//     writel(0, &s5l8702_LCDCON->ack);
 
-    uint32_t status;
-    do {
-        status = readl(&s5l8702_LCDCON->status);
-    } while((status & 1) == 0);
+//     uint32_t status;
+//     do {
+//         status = readl(&s5l8702_LCDCON->status);
+//     } while((status & 1) == 0);
 
-    udelay(100);
+//     udelay(100);
 
-    uint32_t data = readl(&s5l8702_LCDCON->read);
-    if (out != NULL) {
-        *out = (data >> 1);
-    }
-}
+//     uint32_t data = readl(&s5l8702_LCDCON->read);
+//     if (out != NULL) {
+//         *out = (data >> 1);
+//     }
+// }
 
 // static void s5l8702_lcdcon_wait_ready() {
 //     debug("%s: start...\n", __func__);
@@ -172,20 +172,20 @@ static void s5l8702_lcdcon_read_byte(uint8_t *out) {
 //     debug("%s: done.\n", __func__);
 // }
 
-static void s5l8702_lcdcon_transact_read(uint32_t cmd, uint32_t len, uint8_t *out) {
-    writel(0x1000c20, &s5l8702_LCDCON->con);
-    s5l8702_lcdcon_wait_ready();
-    writel(cmd, &s5l8702_LCDCON->cmd);
+// static void s5l8702_lcdcon_transact_read(uint32_t cmd, uint32_t len, uint8_t *out) {
+//     writel(0x1000c20, &s5l8702_LCDCON->con);
+//     s5l8702_lcdcon_wait_ready();
+//     writel(cmd, &s5l8702_LCDCON->cmd);
 
-    // Discard first byte???
-    s5l8702_lcdcon_read_byte(out);
+//     // Discard first byte???
+//     s5l8702_lcdcon_read_byte(out);
 
-    for (uint32_t i = 0; i < len; i++) {
-        s5l8702_lcdcon_read_byte(out);
-        debug("%s: out: %02x\n", __func__, *out);
-        out++;
-    }
-}
+//     for (uint32_t i = 0; i < len; i++) {
+//         s5l8702_lcdcon_read_byte(out);
+//         debug("%s: out: %02x\n", __func__, *out);
+//         out++;
+//     }
+// }
 
 // enum s5l8702_lcd_type {
 //     s5l8702_LCD_TYPE_UNSUPPORTED = 0,
@@ -194,22 +194,22 @@ static void s5l8702_lcdcon_transact_read(uint32_t cmd, uint32_t len, uint8_t *ou
 //     s5l8702_LCD_TYPE_38F7 = 4
 // };
 
-static enum s5l8702_lcd_type s5l8702_lcdcon_get_type(void) {
-    uint8_t id[3] = {0};
-    s5l8702_lcdcon_transact_read(4, 3, id);
-    if (id[0] == 0x48 && id[1] == 0xc4) {
-        return s5l8702_LCD_TYPE_48C4;
-    }
-    if (id[0] == 0x38) {
-        if (id[1] == 0xb3) {
-            return s5l8702_LCD_TYPE_38B3;
-        }
-        if (id[1] == 0xf7) {
-            return s5l8702_LCD_TYPE_38F7;
-        }
-    }
-    return s5l8702_LCD_TYPE_UNSUPPORTED;
-}
+// static enum s5l8702_lcd_type s5l8702_lcdcon_get_type(void) {
+//     uint8_t id[3] = {0};
+//     s5l8702_lcdcon_transact_read(4, 3, id);
+//     if (id[0] == 0x48 && id[1] == 0xc4) {
+//         return s5l8702_LCD_TYPE_48C4;
+//     }
+//     if (id[0] == 0x38) {
+//         if (id[1] == 0xb3) {
+//             return s5l8702_LCD_TYPE_38B3;
+//         }
+//         if (id[1] == 0xf7) {
+//             return s5l8702_LCD_TYPE_38F7;
+//         }
+//     }
+//     return s5l8702_LCD_TYPE_UNSUPPORTED;
+// }
 
 // void s5l8702_lcd_init(void) {
 //     enum s5l8702_lcd_type type = s5l8702_lcdcon_get_type();
