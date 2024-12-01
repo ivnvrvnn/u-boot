@@ -1,0 +1,17 @@
+if ARCH_S5L8702
+
+choice
+    prompt "S5L8702 board select"
+    optional
+
+config TARGET_CLASSIC1G
+    bool "Apple iPod Classic 1G"
+
+endchoice
+
+config SYS_SOC
+    default "s5l8702"
+
+source "board/apple/classic1g/Kconfig"
+
+endif
