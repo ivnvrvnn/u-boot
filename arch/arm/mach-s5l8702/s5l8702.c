@@ -163,14 +163,14 @@ static void s5l8702_lcdcon_read_byte(uint8_t *out) {
     }
 }
 
-static void s5l8702_lcdcon_wait_ready() {
-    debug("%s: start...\n", __func__);
-    uint32_t status;
-    do {
-        status = readl(&s5l8702_LCDCON->status);
-    } while((status & (1<<4)) != 0);
-    debug("%s: done.\n", __func__);
-}
+// static void s5l8702_lcdcon_wait_ready() {
+//     debug("%s: start...\n", __func__);
+//     uint32_t status;
+//     do {
+//         status = readl(&s5l8702_LCDCON->status);
+//     } while((status & (1<<4)) != 0);
+//     debug("%s: done.\n", __func__);
+// }
 
 static void s5l8702_lcdcon_transact_read(uint32_t cmd, uint32_t len, uint8_t *out) {
     writel(0x1000c20, &s5l8702_LCDCON->con);
@@ -187,12 +187,12 @@ static void s5l8702_lcdcon_transact_read(uint32_t cmd, uint32_t len, uint8_t *ou
     }
 }
 
-enum s5l8702_lcd_type {
-    s5l8702_LCD_TYPE_UNSUPPORTED = 0,
-    s5l8702_LCD_TYPE_48C4 = 1,
-    s5l8702_LCD_TYPE_38B3 = 2,
-    s5l8702_LCD_TYPE_38F7 = 4
-};
+// enum s5l8702_lcd_type {
+//     s5l8702_LCD_TYPE_UNSUPPORTED = 0,
+//     s5l8702_LCD_TYPE_48C4 = 1,
+//     s5l8702_LCD_TYPE_38B3 = 2,
+//     s5l8702_LCD_TYPE_38F7 = 4
+// };
 
 static enum s5l8702_lcd_type s5l8702_lcdcon_get_type(void) {
     uint8_t id[3] = {0};
@@ -211,30 +211,30 @@ static enum s5l8702_lcd_type s5l8702_lcdcon_get_type(void) {
     return s5l8702_LCD_TYPE_UNSUPPORTED;
 }
 
-void s5l8702_lcd_init(void) {
-    enum s5l8702_lcd_type type = s5l8702_lcdcon_get_type();
-    const char* types = "UNKNOWN";
-    switch (type) {
-    case s5l8702_LCD_TYPE_48C4:
-        types = "48c4";
-    case s5l8702_LCD_TYPE_38B3:
-        types = "38b3";
-    case s5l8702_LCD_TYPE_38F7:
-        types = "38f7";
-    }
-    debug("%s: detected LCD type %s (%d)\n", __func__, types, type);
-}
+// void s5l8702_lcd_init(void) {
+//     enum s5l8702_lcd_type type = s5l8702_lcdcon_get_type();
+//     const char* types = "UNKNOWN";
+//     switch (type) {
+//     case s5l8702_LCD_TYPE_48C4:
+//         types = "48c4";
+//     case s5l8702_LCD_TYPE_38B3:
+//         types = "38b3";
+//     case s5l8702_LCD_TYPE_38F7:
+//         types = "38f7";
+//     }
+//     debug("%s: detected LCD type %s (%d)\n", __func__, types, type);
+// }
 
 enum s5l8702_buscon_remap {
     s5l8702_BUSCON_REMAP_ENABLE = 1,
     s5l8702_BUSCON_REMAP_SRAM = 2,
 };
 
-static void s5l8702_buscon_remap_sdram(void) {
-    debug("s5l8702_buscon_remap_sdram\n");
-    volatile struct s5l8702_buscon *buscon = (struct s5l8702_buscon *)0x3E000000;
-    buscon->remap = s5l8702_BUSCON_REMAP_ENABLE;
-}
+// static void s5l8702_buscon_remap_sdram(void) {
+//     debug("s5l8702_buscon_remap_sdram\n");
+//     volatile struct s5l8702_buscon *buscon = (struct s5l8702_buscon *)0x3E000000;
+//     buscon->remap = s5l8702_BUSCON_REMAP_ENABLE;
+// }
 
 static void s5l8702_otgphy_off(void) {
     debug("s5l8702_otgphy: turning off\n");
@@ -365,11 +365,11 @@ static void s5l8702_timer_start(enum s5l8702_timer_id id) {
     timer->cmd = s5l8702_TIMER_CMD_START;
 }
 
-static void s5l8702_timer_stop(enum s5l8702_timer_id id) {
-    debug("s5l8702_timer: stopping %d\n", id);
-    volatile struct s5l8702_timer *timer = s5l8702_timer_registers(id);
-    timer->cmd = s5l8702_TIMER_CMD_STOP;
-}
+// static void s5l8702_timer_stop(enum s5l8702_timer_id id) {
+//     debug("s5l8702_timer: stopping %d\n", id);
+//     volatile struct s5l8702_timer *timer = s5l8702_timer_registers(id);
+//     timer->cmd = s5l8702_TIMER_CMD_STOP;
+// }
 
 static uint32_t s5l8702_timer_read(enum s5l8702_timer_id id) {
     volatile struct s5l8702_timer *timer = s5l8702_timer_registers(id);
