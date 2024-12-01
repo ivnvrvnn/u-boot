@@ -248,7 +248,7 @@ static void s5l8702_otgphy_off(void) {
 
 static void s5l8702_otgphy_on(void) {
     // TODO(q3k): lmao
-    s5l8702_lcd_init();
+    // s5l8702_lcd_init();
 
     debug("s5l8702_otgphy: turning on\n");
     s5l8702_enable_clkgate("usb-otg");
