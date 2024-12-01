@@ -701,8 +701,16 @@ config ARCH_EXYNOS
 	imply CMD_DM
 	imply FAT_WRITE
 
-config ARCH_S5L87XX
-	bool "Samsung S5L87XX"
+config ARCH_S5L8702
+    bool "Samsung S5L8702"
+	select CPU_ARM926EJS
+	select DM
+	select DM_GPIO
+	select DM_SERIAL
+	imply CMD_DM
+	
+config ARCH_S5L8730
+	bool "Samsung S5L8730"
 	select CPU_ARM1176
 	select DM
 	select DM_GPIO
